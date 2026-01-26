@@ -20,10 +20,10 @@ jobs:
 
       - name: Build and Push
         run: |
-          docker build -t jayanianu/eventticketing-frontend ./Frontend
-          docker build -t jayanianu/eventticketing-nginx ./nginx
-          docker build -t jayanianu/eventticketing-api ./Backend
+          docker build -t jayani10/eventticketing-frontend ./Frontend
+          docker build -t jayani10/eventticketing-nginx ./nginx
+          docker build -t jayani10/eventticketing-api ./Backend
 
-          docker push jayanianu/eventticketing-frontend
-          docker push jayanianu/eventticketing-nginx
-          docker push jayanianu/eventticketing-api
+          docker push jayani10/eventticketing-frontend
+          docker push jayani10/eventticketing-nginx
+          docker push jayani10/eventticketing-api
