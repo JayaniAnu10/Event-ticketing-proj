@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: EventTicketing
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: jayanianuththara10@gmail.com
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  flyway:
+    enabled: true
+  jpa:
+    show-sql: true
+  cloud:
+    azure:
+      storage:
+        account-name: ${AZURE_STORAGE_ACCOUNT_NAME:YOUR_ACCOUNT_NAME}
+        account-key: ${AZURE_STORAGE_ACCOUNT_KEY:YOUR_ACCOUNT_KEY}
+  jwt:
+    secret: ${JWT_SECRET}
+    accessTokenExpiration: 900 #15min
+    refreshTokenExpiration: 86400 # 1day
+  data:
+    redis:
+      host: redis
+      port: 6379
+  cache:
+    type: redis
+server:
+  servlet:
+    context-path: /api
+stripe:
+  secretKey: ${STRIPE_SECRET_KEY}
+  webhookSecretKey: ${STRIPE_WEBHOOK_SECRET_KEY}
+websiteUrl: http://frontend:5173
+imageContainer: event-image-container
