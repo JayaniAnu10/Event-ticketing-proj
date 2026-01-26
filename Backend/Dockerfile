@@ -1,5 +1,5 @@
 # Build stage
-FROM eclipse-temurin:21-jre AS build
+FROM eclipse-temurin:21-jdk AS build
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY . .
 RUN ./mvnw package -DskipTests
 
 # Runtime stage
-FROM openjdk:21-jre-slim
+FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
