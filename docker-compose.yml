@@ -76,15 +76,6 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - app-network
-    # ADD THIS: Memory optimization for 1GB server
-    command: >
-      --max_allowed_packet=8M
-      --innodb_buffer_pool_size=128M
-      --innodb_log_file_size=32M
-      --max_connections=20
-      --performance-schema=OFF
-      --skip-name-resolve
-    # ADD THIS: Healthcheck to ensure MySQL is ready
     healthcheck:
       test:
         [
@@ -106,8 +97,6 @@ services:
     image: redis:7-alpine
     container_name: redis-cache
     restart: unless-stopped
-    # ADD THIS: Limit Redis memory
-    command: redis-server --maxmemory 100mb --maxmemory-policy allkeys-lru
     networks:
       - app-network
     # ADD THIS: Healthcheck
@@ -127,14 +116,6 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
       SPRING_REDIS_HOST: redis
       SPRING_REDIS_PORT: 6379
-      # ADD THIS: JVM memory settings for 1GB server
-      JAVA_OPTS: "-Xms256m -Xmx512m -XX:+UseSerialGC -XX:MaxMetaspaceSize=128m"
-      # ADD THIS: Database connection settings
-      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: 5
-      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: 2
-      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT: 60000
-      SPRING_DATASOURCE_HIKARI_INITIALIZATION_FAIL_TIMEOUT: 60000
-    # CHANGE THIS: Wait for healthchecks
     depends_on:
       mysql:
         condition: service_healthy
