@@ -90,3 +90,19 @@ create table ticket
         foreign key (ticket_category_id) references ticket_category (id)
 );
 
+INSERT INTO users (
+    name,
+    email,
+    contact,
+    role,
+    password,
+    created_at
+) VALUES (
+             'Admin',
+             'admin@gmail.com',
+             '0771234567',
+             'ADMIN',
+             '$2a$10$4FDQEdPyG8a/0EpCy9kM4.ru/rINfWztwyo/CUzUDzGl4XAATDmbG',
+             NOW()
+         );
+
