@@ -34,8 +34,8 @@ const LoginPage = () => {
       }
     },
 
-    onError: () => {
-      toast.error("Login failed. Check your credentials");
+    onError: (e) => {
+      toast.error(e.message);
     },
   });
 
@@ -52,7 +52,7 @@ const LoginPage = () => {
 
   return (
     <div
-      className="bg-cover min-h-screen mt-10"
+      className="bg-cover min-h-screen"
       style={{ backgroundImage: "var(--login-bg)" }}
     >
       <div className="flex flex-col items-center justify-center">

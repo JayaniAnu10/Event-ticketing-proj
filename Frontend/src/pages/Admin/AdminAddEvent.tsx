@@ -417,7 +417,7 @@ const AdminAddEvent = () => {
                   <Button
                     type="submit"
                     size="lg"
-                    className="flex-1 hover:scale-101 bg-violet-600 p-4"
+                    className="flex-1 hover:scale-101 bg-violet-600 p-4 text-white"
                     disabled={isPending}
                   >
                     Create Event

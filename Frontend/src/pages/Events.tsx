@@ -102,7 +102,7 @@ const Events = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-2 md:mx-11">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-2 md:mx-9">
             {filteredEvents?.map((event) => (
               <div className=" my-9 group" key={event.id}>
                 <div className="border-0 shadow-md/20 group-hover:shadow-xl/30 shadow-popover rounded-2xl mx-7 overflow-clip flex flex-col bg-card ">

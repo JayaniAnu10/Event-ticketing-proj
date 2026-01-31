@@ -73,7 +73,7 @@ const EditProfile = () => {
             Back to Profile
           </Button>
 
-          <Card className="animate-fade-in-up shadow-card">
+          <Card className="border-gray-300/70">
             <CardHeader className="text-center pb-2">
               <CardTitle className="text-2xl">Edit Profile</CardTitle>
             </CardHeader>
@@ -156,7 +156,7 @@ const EditProfile = () => {
           </Card>
 
           {/* Change Password Button */}
-          <Card className="animate-fade-in-up shadow-card mt-6">
+          <Card className="border-gray-300/70 shadow-card mt-6">
             <CardContent className="md:flex items-center justify-between p-6 grid grid-rows-2 gap-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-full">

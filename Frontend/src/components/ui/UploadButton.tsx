@@ -14,7 +14,7 @@ const UploadButton: React.FC<UploadButtonProps> = ({ label, onChange }) => {
     >
       <Upload
         size={16}
-        className="text-secondary dark:text-primary dark:group-hover:text-secondary"
+        className="text-secondary dark:text-white dark:group-hover:text-white"
       />
       <span className="text-[14px] text-secondary dark:text-primary dark:hover:text-secondary font-medium">
         {label}

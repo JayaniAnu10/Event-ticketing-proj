@@ -78,7 +78,7 @@ const HomePage = () => {
               <Calendar className="md:w-5 md:h-5 w-4 h-4 md:mt-1 mt-3 mr-3 group-hover:rotate-12" />
             </button>
           </Link>
-          <Link to={"/signup"}>
+          <Link to={"/login"}>
             <button className="group md:font-bold font-semibold md:p-3 md:rounded-2xl rounded-4xl p-2  my-1 md:text-xl hover:scale-110 transition-transform duration-300 border-primary/40 border-2 bg-background/50 text-violet-600 flex md:gap-3 gap-1">
               <span className="md:ml-3">Get Started</span>
               <Sparkles className="w-5 h-5 md:mt-1 mt-3 mr-3 group-hover:rotate-12" />
