@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20a69e5d-5b49-4979-8337-46023267669f" name="Changes" comment="Refactor booking controller">
-      <change afterPath="$PROJECT_DIR$/Backend/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/src/main/java/com/jayanianu/eventticketing/services/Jwt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/jayanianu/eventticketing/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/jayanianu/eventticketing/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/jayanianu/eventticketing/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/jayanianu/eventticketing/controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/jayanianu/eventticketing/filters/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/jayanianu/eventticketing/filters/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/jayanianu/eventticketing/services/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/jayanianu/eventticketing/services/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/hooks/useAuth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/hooks/useAuth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/default.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +25,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Backend" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -39,12 +33,12 @@
     &quot;assignee&quot;: &quot;JayaniAnu10&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/JayaniAnu10/Event-Ticketing.git&quot;,
-    &quot;accountId&quot;: &quot;7e7aacb5-6357-482b-aa41-cb93f4eef231&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/JayaniAnu10/Event-ticketing-proj.git",
+    "accountId": "7e7aacb5-6357-482b-aa41-cb93f4eef231"
   }
-}</component>
+}]]></component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -187,6 +181,7 @@
       <workItem from="1768197478592" duration="2511000" />
       <workItem from="1768230879253" duration="1226000" />
       <workItem from="1768902068976" duration="68000" />
+      <workItem from="1769795361951" duration="76000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
