@@ -1,3 +1,67 @@
+# services:
+#   mysql:
+#     image: mysql:8.0
+#     container_name: mysql
+#     restart: unless-stopped
+#     environment:
+#       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+#       MYSQL_DATABASE: ${MYSQL_DATABASE}
+#       MYSQL_USER: ${MYSQL_USER}
+#       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+#     volumes:
+#       - mysql-data:/var/lib/mysql
+#     networks:
+#       - app-network
+
+#   redis:
+#     image: redis:7-alpine
+#     container_name: redis-cache
+#     restart: unless-stopped
+#     networks:
+#       - app-network
+
+#   server:
+#     image: jayani10/eventticketing-api
+#     container_name: spring-server
+#     restart: unless-stopped
+#     environment:
+#       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+#       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+#       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+#       SPRING_REDIS_HOST: ${SPRING_REDIS_HOST}
+#       SPRING_REDIS_PORT: 6379
+#     depends_on:
+#       - mysql
+#       - redis
+#     networks:
+#       - app-network
+
+#   client:
+#     image: jayani10/eventticketing-frontend
+#     container_name: react-client
+#     restart: unless-stopped
+#     networks:
+#       - app-network
+
+#   nginx:
+#     image: jayani10/eventticketing-nginx
+#     container_name: nginx-proxy
+#     restart: unless-stopped
+#     ports:
+#       - "80:80"
+#     depends_on:
+#       - server
+#       - client
+#     networks:
+#       - app-network
+
+# volumes:
+#   mysql-data:
+
+# networks:
+#   app-network:
+#     driver: bridge
+
 services:
   mysql:
     image: mysql:8.0
@@ -12,13 +76,46 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - app-network
+    # ADD THIS: Memory optimization for 1GB server
+    command: >
+      --max_allowed_packet=8M
+      --innodb_buffer_pool_size=128M
+      --innodb_log_file_size=32M
+      --max_connections=20
+      --performance-schema=OFF
+      --skip-name-resolve
+    # ADD THIS: Healthcheck to ensure MySQL is ready
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-p${MYSQL_ROOT_PASSWORD}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
 
   redis:
     image: redis:7-alpine
     container_name: redis-cache
     restart: unless-stopped
+    # ADD THIS: Limit Redis memory
+    command: redis-server --maxmemory 100mb --maxmemory-policy allkeys-lru
     networks:
       - app-network
+    # ADD THIS: Healthcheck
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   server:
     image: jayani10/eventticketing-api
@@ -28,11 +125,21 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-      SPRING_REDIS_HOST: ${SPRING_REDIS_HOST}
+      SPRING_REDIS_HOST: redis
       SPRING_REDIS_PORT: 6379
+      # ADD THIS: JVM memory settings for 1GB server
+      JAVA_OPTS: "-Xms256m -Xmx512m -XX:+UseSerialGC -XX:MaxMetaspaceSize=128m"
+      # ADD THIS: Database connection settings
+      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: 5
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: 2
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT: 60000
+      SPRING_DATASOURCE_HIKARI_INITIALIZATION_FAIL_TIMEOUT: 60000
+    # CHANGE THIS: Wait for healthchecks
     depends_on:
-      - mysql
-      - redis
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     networks:
       - app-network
 
