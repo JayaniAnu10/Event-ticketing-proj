@@ -1,9 +1,6 @@
 package com.jayanianu.eventticketing.config;
 
 
-import com.jayanianu.eventticketing.entities.Role;
-import com.jayanianu.eventticketing.filters.JwtAuthenticationFilter;
-import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,6 +19,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.jayanianu.eventticketing.entities.Role;
+import com.jayanianu.eventticketing.filters.JwtAuthenticationFilter;
+
+import lombok.AllArgsConstructor;
 
 @EnableWebSecurity
 @Configuration
@@ -84,6 +86,7 @@ public class SecurityConfig {
                     config.setAllowedOrigins(java.util.List.of(
                             "http://localhost:5173",
                             "http://localhost:3050",
+                            "http://localhost:8080",
                             "http://143.110.177.255"
                     ));
                     config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
