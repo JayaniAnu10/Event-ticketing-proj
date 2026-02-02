@@ -37,7 +37,9 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          script: cd ~/Event-ticketing-proj
+          script: |
+            set -e
+            cd ~/Event-ticketing-proj
             git pull origin main
             docker compose pull
             docker compose up -d
