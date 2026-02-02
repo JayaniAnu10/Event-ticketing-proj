@@ -3,7 +3,6 @@ package com.jayanianu.eventticketing.dtos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Data

@@ -9,9 +9,19 @@ import { format } from "date-fns";
 import useEvents from "@/hooks/useEvents";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
+import useStats from "@/hooks/useStats";
 
 const HomePage = () => {
   const { data: events, error, isLoading } = useEvents();
+  const { data: stats } = useStats();
+  const totalEvents = stats?.totEvents ?? 0;
+  const totalUsers = stats?.totUsers ?? 0;
+
+  const eventCount =
+    totalEvents >= 100 ? "100+" : totalEvents >= 10 ? "10+" : totalEvents;
+
+  const userCount =
+    totalEvents >= 100 ? "100+" : totalUsers >= 10 ? "10+" : totalUsers;
 
   if (isLoading) return <Spinner />;
   if (error) return <p>{error.message}</p>;
@@ -21,7 +31,7 @@ const HomePage = () => {
   return (
     <div>
       <section
-        className="relative flex flex-col items-center justify-center h-[calc(100vh)]  bg-fixed bg-cover bg-center min-h-[400px]"
+        className="relative flex flex-col items-center justify-center md:h-[calc(100vh)]  bg-fixed bg-cover bg-center min-h-[400px]  h-[calc(150vh)]"
         style={{
           backgroundImage: `url(${heroBackground})`,
         }}
@@ -29,7 +39,7 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-linear-to-b from-background/99 via-background/70 to-background/85 z-10" />
         <div className="absolute inset-0 bg-linear-to-r from-background/40 via-transparent to-background/40 z-10" />
 
-        <div className="text-3xl mt-18 md:mt-17 relative z-20 font-extrabold lg:text-7xl md:text-5xl sm:text-4xl drop-shadow-2xl ">
+        <div className="text-5xl  md:mt-17 relative z-20 font-extrabold lg:text-7xl sm:text-4xl drop-shadow-2xl mx-7 text-center">
           <span>Discover Your Next</span>
           <span
             className="block text-center bg-linear-to-r from-violet-900 via-accent-foreground to-violet-500 bg-clip-text text-transparent animate pt-2 pb-6 "
@@ -41,37 +51,29 @@ const HomePage = () => {
             Amazing Event
           </span>
         </div>
-        <div className="items-center text-1xl md:text-xl lg:3xl flex  mt-4 mx-4 md:mx-70">
+        <div className="items-center text-sm md:text-xl lg:3xl flex  mt-4 mx-8 md:mx-70">
           <p className="relative z-20 dark:text-gray-50 font-semibold text-gray-700 text-center">
             Join thousands of people experiencing unforgettable moments. Book
             your tickets now and create memories that last forever.
           </p>
         </div>
-        <div className="relative  mt-4 md:mb-7 z-20  flex md:gap-14 gap-2 -mb-3">
-          <div className="bg-background/50  p-1 hover:scale-110 transition-transform duration-300 border-2 border-primary/20 text-center  rounded-2xl md:px-8 md:py-5 items-center ">
-            <span className="md:text-5xl font-extrabold bg-linear-to-r from-violet-600 to-violet-400 bg-clip-text text-transparent">
-              10K+
+        <div className="relative  mt-4 md:mb-7 z-20 md:gap-14 gap-2 -mb-3 grid grid-cols-2 mx-6">
+          <div className="bg-background/50  p-1 hover:scale-110 transition-transform duration-300 border-2 border-primary/20 text-center  rounded-2xl md:px-8 md:py-5 px-4 py-4 items-center ">
+            <span className="text-5xl font-extrabold bg-linear-to-r from-violet-600 to-violet-400 bg-clip-text text-transparent">
+              {userCount}
             </span>
-            <span className="block  text-sm font-semibold ">
+            <span className="block  text-md font-semibold ">
               Happy Customers
             </span>
           </div>
-          <div className="relative hover:scale-110 transition-transform duration-300 border-2 border-primary/20 text-center p-1 bg-background/50 rounded-2xl md:px-8 md:py-5 items-center ">
-            <span className="md:text-5xl font-extrabold bg-linear-to-r from-violet-600 to-violet-400 bg-clip-text text-transparent">
-              500+
+          <div className="relative hover:scale-110 transition-transform duration-300 border-2 border-primary/20 text-center p-1 bg-background/50 rounded-2xl md:px-8 md:py-5 px-4 py-4 items-center ">
+            <span className="text-5xl font-extrabold bg-linear-to-r from-violet-600 to-violet-400 bg-clip-text text-transparent">
+              {eventCount}
             </span>
-            <span className="block text-sm font-semibold ">Events</span>
-          </div>
-          <div className="relative hover:scale-110 transition-transform duration-300  border-2 border-primary/20 text-center p-1 bg-background/50  rounded-2xl  md:px-8 md:py-5 items-center ">
-            <span className="md:text-5xl font-extrabold bg-linear-to-r from-violet-600 to-violet-400 bg-clip-text text-transparent">
-              4.9★
-            </span>
-            <span className="block  text-sm font-semibold ">
-              Average Rating
-            </span>
+            <span className="block text-md font-semibold ">Events</span>
           </div>
         </div>
-        <div className="relative mt-12 md:mt-2 z-20 flex md:gap-9 gap-4 mx-5 my-8">
+        <div className="relative mt-12 md:mt-2 z-20 flex md:gap-9 gap-4 mx-5 md:my-8 my-0">
           <Link to={"/events"}>
             <button className="group border-none bg-violet-600 text-white md:font-bold font-semibold md:p-3 p-2 rounded-4xl md:rounded-2xl md:text-xl flex md:gap-3 gap-1 my-1  hover:scale-110 transition-transform duration-300">
               <span className="md:ml-3">Explore Events</span>
@@ -85,7 +87,7 @@ const HomePage = () => {
             </button>
           </Link>
         </div>
-        <div className="absolute flex flex-col bottom-0 animate-bounce z-20 items-center">
+        <div className="hidden md:block absolute flex-col bottom-0 animate-bounce z-20 items-center">
           <span className="text-sm">Scroll to explore</span>
           <ArrowDown />
         </div>

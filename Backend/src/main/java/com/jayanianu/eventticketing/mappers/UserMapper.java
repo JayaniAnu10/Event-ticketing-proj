@@ -19,5 +19,8 @@ public interface UserMapper {
     void update(UpdateUserRequest request,@MappingTarget User user);
 
     UserDetailsDto toDetails(User user);
+
+    StatResponse toStats(Long totUsers, long totEvents);
+
 }
 

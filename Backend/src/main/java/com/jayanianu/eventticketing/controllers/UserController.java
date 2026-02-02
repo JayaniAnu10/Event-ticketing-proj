@@ -6,6 +6,7 @@ import com.jayanianu.eventticketing.entities.Role;
 import com.jayanianu.eventticketing.entities.Status;
 import com.jayanianu.eventticketing.mappers.UserMapper;
 import com.jayanianu.eventticketing.repositories.BookingRepository;
+import com.jayanianu.eventticketing.repositories.EventRepository;
 import com.jayanianu.eventticketing.repositories.UserRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +29,7 @@ public class UserController {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final BookingRepository bookingRepository;
+    private final EventRepository eventRepository;
 
 
     @GetMapping("/{id}")
@@ -38,6 +39,13 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(userMapper.toDetails(user));
+    }
+
+    @GetMapping
+    public ResponseEntity<StatResponse> getStats() {
+        var totEvents = eventRepository.count();
+        var totUsers = userRepository.countAllByRole(Role.USER);
+        return ResponseEntity.ok(userMapper.toStats(totUsers,totEvents));
     }
 
     @PostMapping

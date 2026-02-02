@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,6 +52,7 @@ public class AdminService {
         return  ResponseEntity.ok(new AdminDashboardResponse(totEvents,totUsers,totBookings,revenue,upcomingEvents));
     }
 
+    @CacheEvict(value = { "events", "event" }, allEntries = true)
     public ResponseEntity<Void> deleteEvent(Long id){
         var event = eventRepository.findById(id).orElse(null);
         if(event == null){
@@ -92,7 +94,7 @@ public class AdminService {
 
     }
 
-
+    @CacheEvict(value = { "events", "event" }, allEntries = true)
     @Transactional
     public EventDto addEvent(@Valid RequestEventAdd request,
                                   MultipartFile image) throws IOException {
@@ -137,6 +139,7 @@ public class AdminService {
         }
     }
 
+    @CacheEvict(value = { "events", "event" }, allEntries = true)
     @Transactional
     public EventDto  updateEvent(Long id, @Valid RequestEventAdd request, MultipartFile image) throws IOException {
         Event event = eventRepository.findById(id).orElseThrow();
