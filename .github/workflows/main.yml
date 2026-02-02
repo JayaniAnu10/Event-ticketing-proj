@@ -27,3 +27,18 @@ jobs:
           docker push jayani10/eventticketing-frontend
           docker push jayani10/eventticketing-nginx
           docker push jayani10/eventticketing-api
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to DigitalOcean via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: cd ~/Event-ticketing-proj
+            git pull origin main
+            docker compose pull
+            docker compose up -d
+            docker image prune -f
