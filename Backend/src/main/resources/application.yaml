@@ -16,9 +16,9 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
-#  devtools:
-#    restart:
-#      enabled: false
+  #  devtools:
+  #    restart:
+  #      enabled: false
 
   datasource:
     url: ${SPRING_DATASOURCE_URL}
@@ -49,5 +49,5 @@ server:
 stripe:
   secretKey: ${STRIPE_SECRET_KEY}
   webhookSecretKey: ${STRIPE_WEBHOOK_SECRET_KEY}
-websiteUrl: http://localhost:3050
+websiteUrl: http://eventra.jayanidahanayake.me
 imageContainer: event-image-container
