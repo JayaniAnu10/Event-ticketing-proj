@@ -31,7 +31,7 @@ const HomePage = () => {
   return (
     <div>
       <section
-        className="relative flex flex-col items-center justify-center md:h-[calc(100vh)]  bg-fixed bg-cover bg-center min-h-[400px]  h-[calc(130vh)]"
+        className="relative flex flex-col items-center justify-center md:h-[calc(100vh)]  bg-fixed bg-cover bg-center min-h-[400px]  h-[calc(125vh)]"
         style={{
           backgroundImage: `url(${heroBackground})`,
         }}

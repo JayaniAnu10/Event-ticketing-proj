@@ -31,7 +31,6 @@ const SignUpPage = () => {
       email: data.email,
       contact: data.contact,
       password: data.password,
-      confirmPassword: data.confirmPassword,
     });
   };
 
