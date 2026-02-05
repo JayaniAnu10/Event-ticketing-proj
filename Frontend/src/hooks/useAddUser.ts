@@ -22,8 +22,8 @@ const useAddUser = () => {
       toast.success("SignUp successfully");
       navigate("/login");
     },
-    onError: (e) => {
-      toast.error(e.message);
+    onError: () => {
+      toast.error("Signup Failed. Check your email");
     },
   });
 };

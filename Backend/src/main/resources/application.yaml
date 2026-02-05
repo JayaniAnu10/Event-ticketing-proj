@@ -46,5 +46,5 @@ server:
 stripe:
   secretKey: ${STRIPE_SECRET_KEY}
   webhookSecretKey: ${STRIPE_WEBHOOK_SECRET_KEY}
-websiteUrl: http://frontend:5173
+websiteUrl: http://eventra.jayanidahanayake.me
 imageContainer: event-image-container

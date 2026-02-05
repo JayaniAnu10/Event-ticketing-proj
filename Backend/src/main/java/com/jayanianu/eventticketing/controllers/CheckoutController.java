@@ -19,7 +19,7 @@ public class CheckoutController {
     private final CheckoutService checkoutService;
 
     @PostMapping
-    public CheckoutResponse checkout(@Valid @RequestBody CheckoutRequest request) throws StripeException {
+    public CheckoutResponse checkout(@Valid @RequestBody CheckoutRequest request){
         return checkoutService.checkout(request);
     }
 
