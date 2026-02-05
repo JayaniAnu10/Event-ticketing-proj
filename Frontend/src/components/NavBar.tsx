@@ -109,20 +109,21 @@ const NavBar = () => {
             </Button>
           )}
         </div>
-        <div className="md:hidden flex my-auto gap-6">
+        <div className="md:hidden flex my-auto  items-center gap-2">
           <ThemeToggle />
           {user?.role === "USER" && (
-            <Link to={"/profile"}>
+            <Link to={"/profile"} className="">
               <Button
                 variant="outline"
-                className="md:hidden rounded-full border/25 dark:text-white hover:text-white"
+                size="icon"
+                className=" md:hidden rounded-full border/25 dark:text-white hover:text-white "
               >
                 <User className="w-5 h-5" />
               </Button>
             </Link>
           )}
           <div
-            className="md:hidden cursor-pointer pr-4 ml-auto my-auto block"
+            className="md:hidden cursor-pointer pr-4 my-auto block"
             onClick={() => setMenuOpen(!isMenuOpen)}
           >
             <div
@@ -146,7 +147,7 @@ const NavBar = () => {
         <div
           className={`md:hidden absolute top-18 left-0 right-0 z-50
     bg-background/95 backdrop-blur-lg
-    transition-all duration-300
+    transition-all duration-300  w-full max-w-screen overflow-hidden
     ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3 pointer-events-none"}
   `}
         >

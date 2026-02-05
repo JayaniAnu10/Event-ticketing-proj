@@ -31,7 +31,7 @@ const HomePage = () => {
   return (
     <div>
       <section
-        className="relative flex flex-col items-center justify-center md:h-[calc(100vh)]  bg-fixed bg-cover bg-center min-h-[400px]  h-[calc(150vh)]"
+        className="relative flex flex-col items-center justify-center md:h-[calc(100vh)]  bg-fixed bg-cover bg-center min-h-[400px]  h-[calc(130vh)]"
         style={{
           backgroundImage: `url(${heroBackground})`,
         }}
@@ -73,22 +73,23 @@ const HomePage = () => {
             <span className="block text-md font-semibold ">Events</span>
           </div>
         </div>
-        <div className="relative mt-12 md:mt-2 z-20 flex md:gap-9 gap-4 mx-5 md:my-8 my-0">
-          <Link to={"/events"}>
-            <button className="group border-none bg-violet-600 text-white md:font-bold font-semibold md:p-3 p-2 rounded-4xl md:rounded-2xl md:text-xl flex md:gap-3 gap-1 my-1  hover:scale-110 transition-transform duration-300">
+        <div className=" mt-12 md:mt-2 z-20 md:grid md:gap-9 gap-4 mx-0 md:mx-5 md:my-8 my-0 flex flex-col md:grid-cols-2">
+          <Link to={"/events"} className="w-full">
+            <button className="w-full group border-none bg-violet-600 text-white md:font-bold font-semibold md:p-3 rounded-4xl md:rounded-2xl text-xl flex justify-center items-center md:gap-3 gap-2 my-1 hover:scale-110 transition-transform duration-300 px-8 py-4">
               <span className="md:ml-3">Explore Events</span>
-              <Calendar className="md:w-5 md:h-5 w-4 h-4 md:mt-1 mt-3 mr-3 group-hover:rotate-12" />
+              <Calendar className="md:w-5 md:h-5 w-5 h-5 md:mt-1 mt-0 mr-3 group-hover:rotate-12" />
             </button>
           </Link>
-          <Link to={"/login"}>
-            <button className="group md:font-bold font-semibold md:p-3 md:rounded-2xl rounded-4xl p-2  my-1 md:text-xl hover:scale-110 transition-transform duration-300 border-primary/40 border-2 bg-background/50 text-violet-600 flex md:gap-3 gap-1">
+          <Link to={"/login"} className="w-full">
+            <button className="w-full group md:font-bold font-semibold md:p-3 md:rounded-2xl rounded-4xl p-3 my-1 hover:scale-110 transition-transform duration-300 text-xl border-primary/40 border-2 bg-background/50 text-violet-600 flex justify-center items-center md:gap-3 gap-2 px-8 py-4">
               <span className="md:ml-3">Get Started</span>
-              <Sparkles className="w-5 h-5 md:mt-1 mt-3 mr-3 group-hover:rotate-12" />
+              <Sparkles className="w-5 h-5 md:mt-1 mt-0 mr-3 group-hover:rotate-12" />
             </button>
           </Link>
         </div>
-        <div className="hidden md:block absolute flex-col bottom-0 animate-bounce z-20 items-center">
-          <span className="text-sm">Scroll to explore</span>
+
+        <div className="hidden md:flex absolute flex-col bottom-0 animate-bounce z-20 items-center ">
+          <span className="text-sm ">Scroll to explore</span>
           <ArrowDown />
         </div>
       </section>
@@ -104,7 +105,7 @@ const HomePage = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 px-6 gap-15 md:gap-0 md:mt-18 mt-10 md:mx-8">
-            <div className="bg-card flex flex-col rounded-2xl items-center shadow-sm hover:shadow-lg/50 shadow-popover gap-5 mx-3 ">
+            <div className="group bg-card flex flex-col rounded-2xl items-center shadow-sm hover:shadow-lg/50 shadow-popover gap-5 mx-3 ">
               <div className="flex md:mt-15 mt-8 items-center">
                 <div className="group-hover:rotate-12 duration-300 bg-linear-to-br p-4 from-purple-500 to-pink-500 rounded-2xl ">
                   <Ticket className="w-8 h-8 text-white" />
@@ -238,10 +239,12 @@ const HomePage = () => {
                           <div className="flex gap-2">
                             <Calendar className="size-4 " />{" "}
                             <span>
-                              {format(
-                                new Date(event.eventDate.replace(" ", "T")),
-                                "MMMM d, yyyy",
-                              )}
+                              {event.eventDate
+                                ? format(
+                                    new Date(event.eventDate),
+                                    "MMMM d, yyyy",
+                                  )
+                                : "Date not available"}
                             </span>
                           </div>
                           <div className="flex gap-2 ">

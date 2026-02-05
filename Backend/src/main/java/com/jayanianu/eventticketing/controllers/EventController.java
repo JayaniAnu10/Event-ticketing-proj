@@ -24,8 +24,6 @@ import java.util.List;
 @RequestMapping("/events")
 public class EventController {
     private final EventService eventService;
-    private final EventRepository eventRepository;
-    private final EventMapper eventMapper;
 
     @GetMapping
     public List<EventDto> getEvents(

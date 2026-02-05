@@ -4,7 +4,7 @@ import { Moon, Sun } from "lucide-react";
 
 const ThemeToggle = () => {
   const [isDarkMode, setDarkMode] = useState(
-    () => localStorage.getItem("theme") === "dark"
+    () => localStorage.getItem("theme") === "dark",
   );
 
   useEffect(() => {
@@ -23,6 +23,7 @@ const ThemeToggle = () => {
     <div>
       <Button
         variant="ghost"
+        size="icon"
         className="rounded-full hover:text-violet-600 dark:text-white"
         onClick={() => setDarkMode(!isDarkMode)}
       >

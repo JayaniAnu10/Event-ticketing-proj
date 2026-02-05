@@ -36,7 +36,8 @@ public class Event {
     private Long availableSeats;
 
     @Column(name = "event_date")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonProperty("eventDate")
     private LocalDateTime eventDate;
 
     @Column(name = "category")
