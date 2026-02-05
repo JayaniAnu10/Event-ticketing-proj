@@ -2,10 +2,11 @@ package com.jayanianu.eventticketing.dtos;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class TicketCategoryDto {
+public class TicketCategoryDto implements Serializable {
     private Long id;
     private Long ticketCategoryId;
     private Long totalQty;

@@ -2,13 +2,16 @@ package com.jayanianu.eventticketing.dtos;
 
 import com.jayanianu.eventticketing.entities.Event;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class EventTicketDto {
+@NoArgsConstructor
+public class EventTicketDto implements Serializable {
     private Long id;
     private String name;
     private String description;

@@ -39,12 +39,12 @@ public class EventService {
     }
 
     @Cacheable(value = "event", key = "#id")
-    public ResponseEntity<EventTicketDto> getEventById(Long id) {
+    public EventTicketDto getEventById(Long id) {
         var event= eventRepository.findById(id).orElse(null);
         if(event==null) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
-        EventTicketDto dto = eventMapper.toEventDto(event);
-        return ResponseEntity.ok(dto);
+
+        return eventMapper.toEventDto(event);
     }
 }

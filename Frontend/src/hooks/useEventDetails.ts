@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/utils/apiClient";
 import { useQuery } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
 
 interface EventDetails {
   id: number;
@@ -26,7 +27,7 @@ const useEventDetails = (id: number) => {
     const res = await axiosInstance.get<EventDetails>(`/events/${id}`);
     return res.data;
   };
-  return useQuery<EventDetails, Error>({
+  return useQuery<EventDetails, AxiosError>({
     queryKey: ["EventDetails", id],
     queryFn: fetchEventDetails,
   });

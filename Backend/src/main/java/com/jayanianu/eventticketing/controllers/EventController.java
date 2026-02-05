@@ -37,7 +37,11 @@ public class EventController {
 
     @GetMapping("/{id}")
     public ResponseEntity<EventTicketDto> getEventById(@PathVariable Long id){
-        return eventService.getEventById(id);
+        EventTicketDto dto = eventService.getEventById(id);
+        if (dto == null) {
+            return ResponseEntity.notFound().build(); // return 404 if not found
+        }
+        return ResponseEntity.ok(dto);
     }
 
 
