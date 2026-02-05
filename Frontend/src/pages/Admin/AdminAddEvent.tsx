@@ -202,6 +202,13 @@ const AdminAddEvent = () => {
                             <SelectItem value="Food">Food & Dining</SelectItem>
                             <SelectItem value="Art">Art & Culture</SelectItem>
                             <SelectItem value="Sports">Sports</SelectItem>
+                            <SelectItem value="Relax">Relax</SelectItem>
+                            <SelectItem value="Exhibition">
+                              Exhibition
+                            </SelectItem>
+                            <SelectItem value="Competition">
+                              Competition
+                            </SelectItem>
                             <SelectItem value="Entertainment">
                               Entertainment
                             </SelectItem>

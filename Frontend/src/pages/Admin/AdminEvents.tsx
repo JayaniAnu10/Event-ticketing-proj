@@ -37,7 +37,10 @@ const AdminEvents = () => {
               </p>
             </div>
             <Link to="/admin/add-event">
-              <Button size="default" className="gap-2 w-full sm:w-auto">
+              <Button
+                size="default"
+                className="gap-2 w-full sm:w-auto text-white"
+              >
                 <Plus className="w-4 h-4 md:w-5 md:h-5" />
                 Add New Event
               </Button>

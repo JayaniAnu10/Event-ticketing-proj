@@ -93,7 +93,7 @@ const NavBar = () => {
             <Link to={"/admin/dashboard"}>
               <Button
                 variant="outline"
-                className="rounded-full border/25 dark:text-white bg-violet-600 hover:text-white"
+                className="rounded-full border/25 dark:text-white bg-violet-600 text-white"
               >
                 <span className="">Admin DashBoard</span>
               </Button>
@@ -103,7 +103,7 @@ const NavBar = () => {
             <Button
               variant="outline"
               onClick={handleLogout}
-              className="rounded-full border-2 border-violet-500 text-violet-600 hover:bg-violet-400 hover:text-white"
+              className="rounded-full border-2 border-violet-500 text-violet-600 hover:bg-violet-500 hover:text-white"
             >
               Logout
             </Button>
