@@ -87,7 +87,8 @@ public class SecurityConfig {
                             "http://localhost:5173",
                             "http://localhost:3050",
                             "http://localhost:8080",
-                            "http://143.110.177.255"
+                            "http://143.110.177.255",
+                            "http://eventra.jayanidahanayake.me"
                     ));
                     config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
                     config.setAllowedHeaders(java.util.List.of("*"));
