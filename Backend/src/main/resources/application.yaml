@@ -43,6 +43,9 @@ spring:
       port: 6379
   cache:
     type: redis
+sendgrid:
+  api-key: ${MAIL_PASSWORD}
+
 server:
   servlet:
     context-path: /api

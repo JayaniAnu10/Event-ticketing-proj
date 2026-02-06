@@ -1,33 +1,79 @@
 package com.jayanianu.eventticketing.services;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
-import lombok.AllArgsConstructor;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import com.sendgrid.*;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Attachments;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
+import com.sendgrid.helpers.mail.objects.Personalization;
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Base64;
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class EmailService {
-    private final JavaMailSender  mailSender;
+    private SendGrid sendGrid;
 
-    public void sendTicketEmail(String to, String subject, String text, List<File> attachments) throws MessagingException {
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+    @Value("${sendgrid.api-key}")
+    private String sendGridApiKey;
 
-        helper.setTo(to);
-        helper.setSubject(subject);
-        helper.setText(text);
+    @PostConstruct
+    public void init() {
+        if (sendGridApiKey == null || sendGridApiKey.isEmpty()) {
+            throw new RuntimeException("SendGrid API Key not set in environment variables or application.yml!");
+        }
+        sendGrid = new SendGrid(sendGridApiKey);
+    }
 
-        for (File file : attachments) {
-            helper.addAttachment(file.getName(), file);
+    public void sendTicketEmail(String to, String subject, String text, List<File> attachments) {
+        Mail mail = new Mail();
+        Email from = new Email("no-reply@eventra.jayanidahanayake.me"); // sender email
+        mail.setFrom(from);
+        mail.setSubject(subject);
+
+        Personalization personalization = new Personalization();
+        personalization.addTo(new Email(to));
+        mail.addPersonalization(personalization);
+
+        mail.addContent(new Content("text/plain", text));
+
+        // Attach PDF files
+        if (attachments != null) {
+            for (File file : attachments) {
+                try {
+                    Attachments attachment = new Attachments();
+                    byte[] bytes = Files.readAllBytes(file.toPath());
+                    String encoded = Base64.getEncoder().encodeToString(bytes);
+                    attachment.setContent(encoded);
+                    attachment.setType("application/pdf");
+                    attachment.setFilename(file.getName());
+                    attachment.setDisposition("attachment");
+                    mail.addAttachments(attachment);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
+        Request request = new Request();
+        try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+            Response response = sendGrid.api(request);
 
-        mailSender.send(message);
+            System.out.println("📧 Email sent: status=" + response.getStatusCode());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            System.err.println("❌ Failed to send email via SendGrid");
+        }
     }
 }

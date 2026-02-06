@@ -2,6 +2,7 @@ package com.jayanianu.eventticketing.services;
 
 import com.jayanianu.eventticketing.dtos.CheckoutRequest;
 import com.jayanianu.eventticketing.dtos.CheckoutResponse;
+import com.jayanianu.eventticketing.entities.Booking;
 import com.jayanianu.eventticketing.entities.Status;
 import com.jayanianu.eventticketing.entities.Ticket;
 import com.jayanianu.eventticketing.exceptions.BookingNotFoundException;
@@ -62,9 +63,9 @@ public class CheckoutService {
                             List<Ticket> tickets = ticketRepository.findByBooking_Id(booking.getId());
                             booking.setBookingStatus(paymentResult.getPaymentStatus());
                             booking.setTransactionId(paymentResult.getPaymentId());
-                            bookingRepository.save(booking);
+                            Booking saved= bookingRepository.save(booking);
 
-                            ticketEmailAsyncService.sendTicketsAsync(booking);
+                            ticketEmailAsyncService.sendTicketsAsync(saved.getId());
                         }
                 );
 

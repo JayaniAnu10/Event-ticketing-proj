@@ -2,8 +2,10 @@ package com.jayanianu.eventticketing.services;
 
 import com.jayanianu.eventticketing.entities.Booking;
 import com.jayanianu.eventticketing.entities.Ticket;
+import com.jayanianu.eventticketing.repositories.BookingRepository;
 import com.jayanianu.eventticketing.repositories.TicketRepository;
-import lombok.RequiredArgsConstructor;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -11,17 +13,21 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @Service
-@RequiredArgsConstructor
 public class TicketEmailAsyncService {
 
-    private final EmailService emailService;
+    private final BookingRepository bookingRepository;
     private final TicketRepository ticketRepository;
+    private final EmailService emailService;
 
     @Async
-    public void sendTicketsAsync(Booking booking) {
+    @Transactional
+    public void sendTicketsAsync(Long bookingId) {
         try {
-            List<Ticket> tickets = ticketRepository.findByBooking_Id(booking.getId());
+            Booking booking = bookingRepository.findById(bookingId).orElseThrow();
+
+            List<Ticket> tickets = ticketRepository.findByBooking_Id(bookingId);
             List<File> pdfFiles = new ArrayList<>();
 
             for (Ticket ticket : tickets) {
@@ -36,9 +42,10 @@ public class TicketEmailAsyncService {
                     pdfFiles
             );
 
-            System.out.println(" Email sent successfully");
+            System.out.println("✅ Async email sent for bookingId=" + bookingId);
 
         } catch (Exception e) {
+            System.err.println("❌ Async email failed for bookingId=" + bookingId);
             e.printStackTrace();
         }
     }

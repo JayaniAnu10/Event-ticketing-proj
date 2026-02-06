@@ -15,7 +15,7 @@ public class WebConfig {
             public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOriginPatterns("http://localhost:5173",
-                                "http://localhost:3050","http://143.110.177.255","http://localhost:8080","http://eventra.jayanidahanayake.me")
+                                "http://localhost:3050","http://localhost:8080","http://eventra.jayanidahanayake.me")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
                         .allowedHeaders("*")
                         .exposedHeaders("*")
