@@ -25,6 +25,7 @@ public class CheckoutService {
     private final PaymentGateway paymentGateway;
     private final EmailService emailService;
     private final TicketRepository ticketRepository;
+    private final TicketEmailAsyncService ticketEmailAsyncService;
 
 
     @Transactional
@@ -63,25 +64,7 @@ public class CheckoutService {
                             booking.setTransactionId(paymentResult.getPaymentId());
                             bookingRepository.save(booking);
 
-                            List<File> pdfFiles = new ArrayList<>();
-
-                            try {
-                                for(Ticket ticket:tickets) {
-                                    File pdfFile = TicketPDFGeneratorService.generatePDF(booking, ticket);
-                                    pdfFiles.add(pdfFile);
-                                }
-                                    emailService.sendTicketEmail(
-                                            booking.getUser().getEmail(),
-                                            "Your Tickets For "+booking.getEvent().getName(),
-                                            "Your payment was successful! Please find your tickets attached.",
-                                            pdfFiles
-                                    );
-
-
-                                System.out.println("PDF Generated Successfully");
-                            } catch (Exception e) {
-                                 throw new PDFGenerationException(e.getMessage());
-                            }
+                            ticketEmailAsyncService.sendTicketsAsync(booking);
                         }
                 );
 
