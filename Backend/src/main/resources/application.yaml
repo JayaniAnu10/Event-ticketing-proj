@@ -2,9 +2,9 @@ spring:
   application:
     name: EventTicketing
   mail:
-    host: smtp.gmail.com
+    host: smtp.sendgrid.net
     port: 587
-    username: jayanianuththara10@gmail.com
+    username: apikey
     password: ${MAIL_PASSWORD}
     properties:
       mail:
