@@ -72,11 +72,11 @@ const LoginPage = () => {
               </span>
             </div>
           </div>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="rounded-lg border bg-card p-4 mx-5">
             <div className="flex items-start">
               <div className="flex-shrink-0">
                 <svg
-                  className="h-5 w-5 text-blue-400"
+                  className="h-5 w-5 text-primary"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -88,10 +88,10 @@ const LoginPage = () => {
                 </svg>
               </div>
               <div className="ml-3 flex-1">
-                <h3 className="text-sm font-medium text-blue-800">
+                <h3 className="text-sm font-medium text-card-foreground">
                   Admin Login Credentials
                 </h3>
-                <div className="mt-2 text-sm text-blue-700">
+                <div className="mt-2 text-sm text-muted-foreground">
                   <p className="font-mono">
                     <span className="font-semibold">Email:</span>{" "}
                     admin@gmail.com
